@@ -1,43 +1,50 @@
-#ifndef PRINT_F
-#define PRINT_F
+#ifndef _PRINTF_H_
+#define _PRINTF_H_
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 
-/**
- * struct convert - defines a function for symbols and functions
- * @sym: the operator
- * @f: function
- */
-struct convert
-{
-	char *sym;
-	int (*f)(va_list);
-};
-typedef struct convert conver_t;
-int _pacer(const char *format, conver_t f_list[], va_list arg_list);
-
-int _printf(const char *format, ...);
+/*_putchar*/
 int _putchar(char c);
-int _print_char(va_list);
-int _print_string(va_list);
-int _print_percent(va_list);
-int _print_integer(va_list);
-int _print_number(va_list);
-int _print_binary(va_list);
-int _print_reversed(va_list arg);
-int _rot13(va_list);
-int _unsigned_integer(va_list);
-int _print_octal(va_list list);
-int _print_hex(va_list list);
-int _print_heX(va_list list);
 
-unsigned int base_len(unsigned int, int);
-char *rev_string(char *);
-void write_base(char *str);
-char *_memcpy(char *dest, char *src, unsigned int n);
-int print_unsigned_number(unsigned int);
+/*print_functs.c*/
+int print_int(va_list arg);
+int print_unsigned(va_list arg);
 
-#endif
+/*_printf.c*/
+int _printf(const char *format, ...);
+
+/*print_functs.c*/
+int print_char(va_list arg);
+int print_str(va_list arg);
+int print_percent(void);
+
+/*Binary.c*/
+void print_binary(unsigned int n, unsigned int *printed);
+
+/*unsigned_to_binary.c*/
+int print_unsignedToBinary(va_list arg);
+int print_oct(va_list arg);
+int print_unsignedIntToHex(unsigned int num, char _case);
+
+/*hexadecimals.c*/
+int print_hex_base(va_list arg, char _case);
+int print_hex(va_list arg);
+int print_HEX(va_list arg);
+
+/*print_functs.c*/
+int print_STR(va_list arg);
+
+/**
+ * struct identifierStruct - structure definition
+ * @indentifier: type
+ * @printer: function to print
+ */
+
+typedef struct identifierStruct
+{
+char *indentifier;
+int (*printer)(va_list);
+} identifierStruct;
+
+#endif /* _PRINTF_H_ */
